@@ -5,9 +5,10 @@ from django.contrib.auth.models import AbstractUser
 # inherit the built in user model: AbstractUser
 # and extend it , add additional fields
 class Customer(AbstractUser):
-    # driver license
+    '''Encapsulate the idea of Customer (i.e., driver license number)'''
+    
+    #data attribute of a customer
     driver_license = models.CharField(max_length=50, blank=True, null=True)
-    # birth date of customer
     birth_date = models.CharField(max_length=30, blank=True, null=True)
     phone = models.CharField(max_length=30, blank=True, null=True)
 
@@ -16,13 +17,11 @@ class Customer(AbstractUser):
         verbose_name_plural = verbose_name
 
     def __str__(self):
+        '''Return a string representation of this object.'''
         return self.username
 
-
 class Car(models.Model):
-    """
-    car model
-    """
+    """  Encapsulate the idea of car model """
     # name of the car
     name = models.CharField(max_length=200, verbose_name='name')
     type_choices = (('Economy', 'Economy'), ('Standard', 'Standard'),
@@ -41,6 +40,7 @@ class Car(models.Model):
     status = models.BooleanField(default=True)
 
     class Meta:
+        '''Inner class of the Car class'''
         verbose_name = "car"
         verbose_name_plural = verbose_name
         ordering = ['-created']
@@ -51,6 +51,8 @@ class Car(models.Model):
 
 
 class Booking(models.Model):
+    '''Encapsulate the concept of booking'''
+
     # customer who rent
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='customer')
     # car to rent
@@ -62,6 +64,7 @@ class Booking(models.Model):
     status = models.BooleanField(default=False)
 
     class Meta:
+        '''Inner class of the booking class'''
         verbose_name = "Booking"
         verbose_name_plural = verbose_name
         ordering = ('pick_up_date',)
@@ -71,6 +74,7 @@ class Booking(models.Model):
         return str(self.id)
 
     def get_total_hours(self):
+        '''Return the booking hours'''
         # subtract the dates, yield a datetime.timedelta object
         dt = self.return_date - self.pickup_date
         # Returns number of hours between dates
@@ -78,5 +82,6 @@ class Booking(models.Model):
         return hours
 
     def get_total_price(self):
+        '''Return the total price'''
         return self.get_total_hours() * self.car.hour_rate
 

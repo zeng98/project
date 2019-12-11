@@ -10,6 +10,7 @@ from datetime import datetime
 
 # get list of car that we have
 class HomePageView(ListView):
+    '''This is the homepage view'''
     model = Car  # set the list view model
     template_name = 'home.html'  # template which we need to render to user
 
