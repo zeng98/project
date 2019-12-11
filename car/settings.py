@@ -25,7 +25,7 @@ SECRET_KEY = '5$0t0gu+md8&w0sj2=lkgpx7mm2_p2(t1mryskj-z_*yosqllx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
