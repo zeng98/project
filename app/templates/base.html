@@ -1,0 +1,105 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>CarX.com - Rent your dream car!</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <header>
+      <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4 class="text-white">ABOUT US</h4>
+                <p class="lead text-muted">CarX.com is a constantly growing car rental company located at every airport in the United States. 
+                  We provides high quality services at affordable rates. Get around the City for less! </p>
+            </div>
+            <div class="col-sm-4 offset-md-1 py-4">
+              <h4 class="text-white">Contact</h4>
+              <ul class="list-unstyled">
+                <li><a href="#" class="text-white">Follow on Twitter</a></li>
+                <li><a href="#" class="text-white">Like on Facebook</a></li>
+                <li><a href="#" class="text-white">Email me</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex">
+          <a href="{% url 'app:home_page' %}" class="navbar-brand flex-grow-1">
+            <strong>CarX.com</strong>
+          </a>
+            <a href="#" class="navbar-brand flex-grow-1">
+            <strong>Rent your dream car</strong>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+            {% if user.is_authenticated %}
+                {% if request.user.is_superuser %}
+                    <a href="{% url 'app:all_booking' %}" class="nav-link" style="color: whitesmoke">All Bookings</a>
+                {% endif %}
+                <a href="{% url 'app:booking_list' request.user.id %}" class="nav-link" style="color: whitesmoke">My Bookings</a>
+                <a href="{% url 'app:customer_detail' user.id %}" class="nav-link" style="color: whitesmoke">{{ user.username}}</a>
+                <a href="{% url 'logout' %}" class="nav-link" style="color: whitesmoke">Logout</a>
+            {% else %}
+                <a href="{% url 'app:register' %}" class="nav-link">Register</a>
+                <a href="{% url 'login' %}" class="nav-link">Login</a>
+            {% endif %}
+        </div>
+      </div>
+    </header>
+
+    {% block main %}
+    {% endblock %}
+
+
+    <footer class="text-muted">
+      <div class="container mt-2">
+        <p class="float-right">
+          <a href="#">Back to top</a>
+        </p>
+        <p>CarX.com is &copy; Rent your dream car!</p>
+          <p>Web Templates designed with Boostrap 4</p>
+
+      </div>
+    </footer>
+
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    {% block script %}
+    {% endblock %}
+
+  </body>
+</html>

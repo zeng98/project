@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<main role="main">
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+                  <div class="card text-center">
+              <div class="card-header">
+                {{ customer }}'s HomePage
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Driver License: {{ customer.driver_license}}</h5>
+                  <h5 class="card-title">Birth Date: {{ customer.birth_date}}</h5>
+                <h5 class="card-title">Cellphone: {{ customer.phone}}</h5>
+                <a href="{% url 'app:booking_list' customer.id %}" class="btn btn-primary">Client's Bookings</a>
+              </div>
+              <div class="card-footer text-muted">
+                Last Login at 2 days ago
+              </div>
+            </div>
+    </div>
+  </div>
+
+</main>
+
+
+
+
+
+
+{% endblock %}
