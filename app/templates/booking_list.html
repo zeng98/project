@@ -35,7 +35,6 @@
                           <td>Pending Approved</td>
                       {% endif %}
                         <td>
-                            <a href="{% url 'app:booking_update' booking.id %}" class="btn btn-primary">View</a>
                             <a href="{% url 'app:booking_update' booking.id %}" class="btn btn-success">Edit</a>
                             {% if booking.customer == request.user %}
                                 <!-- Button trigger modal -->

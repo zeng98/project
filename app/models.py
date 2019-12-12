@@ -13,6 +13,7 @@ class Customer(AbstractUser):
     phone = models.CharField(max_length=30, blank=True, null=True)
 
     class Meta:
+        '''Inner class of Class Customer'''
         verbose_name = "Customer"
         verbose_name_plural = verbose_name
 

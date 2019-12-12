@@ -10,17 +10,19 @@ from datetime import datetime
 
 # get list of car that we have
 class HomePageView(ListView):
-    '''This is the homepage view.'''
+    ''' Create a subclass of ListView to display all the cars'''
     model = Car  # set the list view model
     template_name = 'home.html'  # template which we need to render to user
 
 
 # get list of order of one customer
 class BookingListView(ListView):
+    '''A listview to show the booking'''
     model = Booking  # set the model list view of booking order, which is the data sorce
     template_name = 'Booking_list.html' # template for list booking order
 
     def get_queryset(self):
+        '''return the queryset'''
         # overide the queryset function, to get the all orders of specific user
         return Booking.objects.filter(customer_id=self.request.user).order_by('-pick_up_date')
 
@@ -29,6 +31,7 @@ class BookingListView(ListView):
 # add a login required decorater, which means user need login before access this page
 @login_required
 def delete_booking(request, **kwargs):
+    '''delete booking'''
     # if request http method is post
     if request.method == 'POST': 
         # delete the booking order by booking id which primary key send from post method
@@ -43,6 +46,7 @@ def delete_booking(request, **kwargs):
 
 @login_required
 def add_booking(request, **kwargs):
+    '''add booking'''
     if request.method == 'POST':
         # process the data, convert string to datetime format
         drop_off_date = datetime.strptime(request.POST['drop_off_date'], "%H:%M %m/%d/%Y")
@@ -70,6 +74,7 @@ def add_booking(request, **kwargs):
 
 # register user
 def register(request):
+    '''register'''
     if request.method == 'POST':
         # bounded form from post
         form = CustomerCreationForm(request.POST)
@@ -88,6 +93,7 @@ def register(request):
 # update a order
 @login_required
 def booking_edit(request, **kwargs):
+    '''edit the booking'''
     if request.method == 'POST':
         # get boooking object by pk send from post 
         booking = Booking.objects.filter(id=request.POST['pk']).first()
@@ -117,5 +123,6 @@ class AllBookingList(ListView):
 
 
 class CustomerDetailView(DetailView):
+    '''a detail view of the customer information'''
     model = Customer
     template_name = 'customer_profile.html'

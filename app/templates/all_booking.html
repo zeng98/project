@@ -29,7 +29,7 @@
                       <th scope="row">{{ booking.car.name }}</th>
                       <td>{{ booking.pick_up_date }}</td>
                       <td>{{ booking.drop_off_date }}</td>
-                      <td><a href="" class="btn btn-success">Paid</a></td>
+                      <td><a href="" class="btn btn-success">Pay</a></td>
 
                       {% if booking.status %}
                           <td>Approved</td>
@@ -37,7 +37,6 @@
                           <td>Pending Approved</td>
                       {% endif %}
                         <td>
-                            <a href="{% url 'app:booking_update' booking.id %}" class="btn btn-primary">View</a>
                             <a href="{% url 'app:booking_update' booking.id %}" class="btn btn-success">Edit</a>
                             {% if request.user.is_superuser %}
                                 <!-- Button trigger modal -->
